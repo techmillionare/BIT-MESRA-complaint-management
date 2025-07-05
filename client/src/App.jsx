@@ -24,6 +24,7 @@ import Feedback from './pages/Feedback';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import VerifyEmail from './pages/VerifyEmail';
+import Team from './pages/team';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/team" element={<Team />} />
 
           {/* Student Routes */}
           <Route path="/student-dashboard" element={

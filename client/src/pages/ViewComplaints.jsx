@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
-
 
 const ViewComplaints = () => {
   const [complaints, setComplaints] = useState([]);
@@ -13,38 +12,35 @@ const ViewComplaints = () => {
     type: '',
     status: ''
   });
+
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Parse query parameters from URL
     const queryParams = new URLSearchParams(location.search);
-    const hostelNo = queryParams.get('hostelNo');
-    const type = queryParams.get('type');
-    
-    if (hostelNo || type) {
-      setFilter({
-        hostelNo: hostelNo || '',
-        type: type || '',
-        status: ''
-      });
-    }
-    
-    fetchComplaints(hostelNo, type);
+    const hostelNo = queryParams.get('hostelNo') || '';
+    const type = queryParams.get('type') || '';
+    const status = queryParams.get('status') || '';
+
+    setFilter({ hostelNo, type, status });
+
+    fetchComplaints(hostelNo, type, status);
   }, [location]);
 
-  const fetchComplaints = async (hostelNo, type) => {
+  const fetchComplaints = async (hostelNo, type, status) => {
     setLoading(true);
     try {
       let url = '/complaints/admin/all';
       const params = new URLSearchParams();
-      
+
       if (hostelNo) params.append('hostelNo', hostelNo);
       if (type) params.append('type', type);
-      
+      if (status) params.append('status', status);
+
       if (params.toString()) {
         url += `?${params.toString()}`;
       }
-      
+
       const res = await api.get(url);
       setComplaints(res.data.data);
     } catch (error) {
@@ -63,12 +59,12 @@ const ViewComplaints = () => {
 
   const applyFilters = () => {
     const params = new URLSearchParams();
-    
+
     if (filter.hostelNo) params.append('hostelNo', filter.hostelNo);
     if (filter.type) params.append('type', filter.type);
     if (filter.status) params.append('status', filter.status);
-    
-    window.location.search = params.toString();
+
+    navigate(`?${params.toString()}`);
   };
 
   const clearFilters = () => {
@@ -77,7 +73,7 @@ const ViewComplaints = () => {
       type: '',
       status: ''
     });
-    window.location.search = '';
+    navigate('');
   };
 
   if (loading) {
@@ -93,13 +89,13 @@ const ViewComplaints = () => {
       <Helmet>
         <title>View Complaints | BIT Mesra Complaint System</title>
       </Helmet>
-      
+
       <div className="max-w-6xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">View Complaints</h1>
-        
+
         <div className="bg-white shadow rounded-lg p-6 mb-6">
           <h2 className="text-lg font-medium text-gray-800 mb-4">Filters</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label htmlFor="hostelNo" className="block text-sm font-medium text-gray-700">
@@ -114,11 +110,11 @@ const ViewComplaints = () => {
               >
                 <option value="">All Hostels</option>
                 {[...Array(13).keys()].map(num => (
-                  <option key={num+1} value={num+1}>Hostel {num+1}</option>
+                  <option key={num + 1} value={num + 1}>Hostel {num + 1}</option>
                 ))}
               </select>
             </div>
-            
+
             <div>
               <label htmlFor="type" className="block text-sm font-medium text-gray-700">
                 Complaint Type
@@ -135,7 +131,7 @@ const ViewComplaints = () => {
                 <option value="College">College</option>
               </select>
             </div>
-            
+
             <div>
               <label htmlFor="status" className="block text-sm font-medium text-gray-700">
                 Status
@@ -155,7 +151,7 @@ const ViewComplaints = () => {
               </select>
             </div>
           </div>
-          
+
           <div className="flex justify-end space-x-3 mt-4">
             <button
               onClick={clearFilters}
@@ -171,7 +167,7 @@ const ViewComplaints = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="bg-white shadow rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
@@ -208,10 +204,10 @@ const ViewComplaints = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                          ${complaint.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
-                            complaint.status === 'In Progress' ? 'bg-blue-100 text-blue-800' : 
-                            complaint.status === 'Resolved' ? 'bg-green-100 text-green-800' : 
-                            'bg-red-100 text-red-800'}`}>
+                          ${complaint.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
+                            complaint.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
+                              complaint.status === 'Resolved' ? 'bg-green-100 text-green-800' :
+                                'bg-red-100 text-red-800'}`}>
                           {complaint.status}
                         </span>
                       </td>
