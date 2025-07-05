@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
+import { Link } from 'react-router-dom';
+
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -99,24 +101,24 @@ const AdminDashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow">
             <h3 className="text-lg font-medium text-gray-800 mb-4">Quick Actions</h3>
             <div className="space-y-3">
-              <a
-                href="/view-complaints"
+              <Link
+                to="/view-complaints"
                 className="block px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md text-gray-700 transition"
               >
                 View All Complaints
-              </a>
-              <a
-                href="/view-complaints?hostelNo=1"
+              </Link>
+              <Link
+                to="/view-complaints?hostelNo=1"
                 className="block px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md text-gray-700 transition"
               >
                 View Hostel 1 Complaints
-              </a>
-              <a
-                href="/view-complaints?type=College"
+              </Link>
+              <Link
+                to="/view-complaints?type=College"
                 className="block px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md text-gray-700 transition"
               >
                 View College Complaints
-              </a>
+              </Link>
             </div>
           </div>
           

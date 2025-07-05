@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import api from '../utils/api';
+
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState('');
@@ -27,10 +29,10 @@ const VerifyEmail = () => {
     
     try {
       const endpoint = role === 'student' 
-        ? '/api/auth/verify-email' 
-        : '/api/auth/verify-authority-email';
+        ? '/auth/verify-email' 
+        : '/auth/verify-authority-email';
       
-      const response = await axios.post(endpoint, {
+      const response = await api.post(endpoint, {
         email,
         otp
       });

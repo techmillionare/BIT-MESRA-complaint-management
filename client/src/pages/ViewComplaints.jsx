@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import api from '../utils/api';
+
 
 const ViewComplaints = () => {
   const [complaints, setComplaints] = useState([]);
@@ -34,7 +36,7 @@ const ViewComplaints = () => {
   const fetchComplaints = async (hostelNo, type) => {
     setLoading(true);
     try {
-      let url = '/api/complaints/admin/all';
+      let url = '/complaints/admin/all';
       const params = new URLSearchParams();
       
       if (hostelNo) params.append('hostelNo', hostelNo);
@@ -44,7 +46,7 @@ const ViewComplaints = () => {
         url += `?${params.toString()}`;
       }
       
-      const res = await axios.get(url);
+      const res = await api.get(url);
       setComplaints(res.data.data);
     } catch (error) {
       toast.error('Failed to fetch complaints');

@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import api from '../utils/api';
+
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +17,7 @@ const ForgotPassword = () => {
     setLoading(true);
     
     try {
-      const response = await axios.post('/api/auth/forgot-password', {
+      const response = await api.post('/auth/forgot-password', {
         email,
         role
       });

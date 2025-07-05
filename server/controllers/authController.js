@@ -534,4 +534,16 @@ exports.checkAuth = async (req, res) => {
       res.status(500).json({ success: false, message: 'Server error', error: error.message });
     }
   };
+
+  exports.logout = async (req, res) => {
+  try {
+    res.clearCookie('token'); // optional, if you're using cookies
+    res.status(200).json({ success: true, message: 'Logged out successfully' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ success: false, message: 'Logout failed', error: error.message });
+  }
+};
+
+
   

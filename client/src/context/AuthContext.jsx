@@ -82,13 +82,14 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await api.post('/auth/logout', {}, { withCredentials: true });
+      await api.post('/auth/logout', {}, { withCredentials: true }); // ✅ fixed here
       localStorage.removeItem('token');
       setUser(null);
     } catch (error) {
       console.error('Logout error:', error);
     }
   };
+
 
   return (
     <AuthContext.Provider value={{ user, loading, login, logout, setUser }}>

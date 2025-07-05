@@ -32,6 +32,7 @@ router.post('/authority-login', authController.authorityLogin);
 
 // Admin routes
 router.post('/admin-login', authController.adminLogin);
+router.post('/logout', authController.logout);
 
 // Password reset routes
 router.post('/forgot-password', authController.forgotPassword);

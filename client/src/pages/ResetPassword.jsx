@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import api from '../utils/api';
+
 
 const ResetPassword = () => {
   const [otp, setOtp] = useState('');
@@ -34,7 +36,7 @@ const ResetPassword = () => {
     setLoading(true);
     
     try {
-      const response = await axios.post('/api/auth/reset-password', {
+      const response = await api.post('/auth/reset-password', {
         email,
         otp,
         newPassword,

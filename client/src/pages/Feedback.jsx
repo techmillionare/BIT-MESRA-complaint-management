@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthContext';
+import api from '../utils/api';
+
 
 const Feedback = () => {
   const { user } = useContext(AuthContext);
@@ -18,7 +20,7 @@ const Feedback = () => {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const res = await axios.get('/api/complaints/student');
+        const res = await api.get('/complaints/student');
         // Filter only resolved complaints
         const resolvedComplaints = res.data.data.filter(
           complaint => complaint.status === 'Resolved'
@@ -45,7 +47,7 @@ const Feedback = () => {
     setLoading(true);
     
     try {
-      await axios.post('/api/feedback', {
+      await api.post('/feedback', {
         complaintId: selectedComplaint,
         rating,
         comments
