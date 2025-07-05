@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
 import { Link } from 'react-router-dom';

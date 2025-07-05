@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
 
