@@ -29,6 +29,8 @@ const Navbar = () => {
     <Link to="/" className="text-2xl font-bold">
       BIT Mesra Complaint System
     </Link>
+    <Link to="/student-notifications">View Notifications</Link>
+
 
     <div className="flex items-center space-x-6">
       {/* Always visible Team link */}

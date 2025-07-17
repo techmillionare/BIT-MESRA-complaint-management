@@ -46,6 +46,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/authority', authorityRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/feedback', feedbackRoutes);
+app.use('/api/notifications', require('./routes/notifications'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

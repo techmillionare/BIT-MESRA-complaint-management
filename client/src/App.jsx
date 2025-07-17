@@ -25,6 +25,9 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import VerifyEmail from './pages/VerifyEmail';
 import Team from './pages/team';
+import Notifications from './pages/Notifications';
+import StudentNotifications from './pages/StudentNotifications';
+
 
 function App() {
   return (
@@ -88,10 +91,21 @@ function App() {
               <ViewComplaints />
             </PrivateRoute>
           } />
+          <Route path="/notifications" element={
+            <PrivateRoute roles={['admin', 'authority']}>
+              <Notifications />
+            </PrivateRoute>
+          } />
+          {/* <Route path="/student-notifications" element={
+            <PrivateRoute roles={['student']}>
+              <StudentNotifications />
+            </PrivateRoute>
+          } /> */}
+          <Route path="/student-notifications" element={<StudentNotifications />} />
         </Routes>
       </main>
       <Footer />
-      <ToastContainer 
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
