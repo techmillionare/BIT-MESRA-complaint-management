@@ -24,7 +24,7 @@ const app = express();
 app.use(helmet());
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://collage-comp-x7jp-e2sre5jdn-suraj7170s-projects.vercel.app' // your Vercel frontend URL
+  'https://collage-comp-x7jp-ncgedf8tw-suraj7170s-projects.vercel.app' // your Vercel frontend URL
 ];
 
 app.use(cors({
